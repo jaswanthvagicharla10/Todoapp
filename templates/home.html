@@ -41,9 +41,12 @@
         <div class="task-box d-flex justify-content-between align-items-center">
            {{task.task}}
           <div class="action-buttons">
-            <button class="btn btn-success btn-sm">✔️ Mark as Done</button>
-            <button class="btn btn-danger btn-sm">🗑️</button>
-            <button class="btn btn-primary btn-sm">✏️</button>
+              <a href="{% url "mark_as_done" task.pk %}"
+            <button class="btn btn-success btn-sm">✔️ Mark as Done</button></a>
+            <a href="{% url "delete_task" task.pk %}"
+            <button class="btn btn-danger btn-sm">🗑️</button></a>
+             <a href="{% url 'edit_task' task.pk %}"
+            <button class="btn btn-primary btn-sm">✏️</button></a>
           </div>
         </div>
         
@@ -52,10 +55,20 @@
       <!-- Right Column -->
       <div class="col-md-6">
         <h5><strong>Completed Tasks</strong></h5>
+          {% for task in completed_tasks %}
+         <div class="task-box d-flex justify-content-between align-items-center">
+    <div class="task-text">
+        {{ task.task }}
+    </div>
+    <div class="action-buttons" >
+        <a href="{% url 'mark_as_undone' task.pk %}">
+            <button  class="btn btn-danger btn-sm">✔️ Mark as Undone</button>
+        </a>
+    </div>
+</div>
 
-        <div class="task-box">
-          This is the completed task.
-        </div>
+        
+        {% endfor %}
       </div>
     </div>
   </div>
