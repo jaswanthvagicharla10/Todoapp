@@ -32,21 +32,23 @@
     <h2 class="text-center my-4">Django ToDo App</h2>
 
     <div class="row">
-      <!-- Left Column -->
+      
       <div class="col-md-6">
         <h5><strong>My Day</strong></h5>
+         {% for task in tasks %}
         <p style="font-size: small; color: gray;">{% now "jS F Y" %}</p>
 
         <div class="task-box d-flex justify-content-between align-items-center">
-          <span>This is some task</span>
+           {{task.task}}
           <div class="action-buttons">
             <button class="btn btn-success btn-sm">✔️ Mark as Done</button>
             <button class="btn btn-danger btn-sm">🗑️</button>
             <button class="btn btn-primary btn-sm">✏️</button>
           </div>
         </div>
+        
+      {% endfor %}
       </div>
-
       <!-- Right Column -->
       <div class="col-md-6">
         <h5><strong>Completed Tasks</strong></h5>
@@ -59,10 +61,13 @@
   </div>
 
   <!-- Add Task Section -->
+   <form action="{% url "addTask" %}" method="POST">
+    {% csrf_token %}
   <div class="add-section text-center">
+    <input type="text" name="task" placeholder="Add a task" class="form-control w-400 mx-auto mb-2">
     <button class="btn btn-info text-white">+ Add</button>
   </div>
-
+  </form>
 </body>
 </html>
 
